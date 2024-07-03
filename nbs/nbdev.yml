@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "improve-diarization-with-llm"
+  site-url: "https://russedavid.github.io/improve-diarization-with-llm"
+  description: "This tool can take a long script (greater than 10 hours) of diarized content and improve the diarization by prompting an LLM model to look for obviously incorrect attribution and fix it."
+  repo-branch: main
+  repo-url: "https://github.com/russedavid/improve-diarization-with-llm"
