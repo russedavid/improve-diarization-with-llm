@@ -16,6 +16,4 @@ d = { 'settings': { 'branch': 'main',
                                                                'improve_diarization_with_llm.claude_corrector.ClaudeDiarizationCorrector.read_and_chunk': ( 'claude_corrector.html#claudediarizationcorrector.read_and_chunk',
                                                                                                                                                             'improve_diarization_with_llm/claude_corrector.py'),
                                                                'improve_diarization_with_llm.claude_corrector.ClaudeDiarizationCorrector.write_results_to_file': ( 'claude_corrector.html#claudediarizationcorrector.write_results_to_file',
-                                                                                                                                                                   'improve_diarization_with_llm/claude_corrector.py')},
-            'improve_diarization_with_llm.core': { 'improve_diarization_with_llm.core.foo': ( 'core.html#foo',
-                                                                                              'improve_diarization_with_llm/core.py')}}}
+                                                                                                                                                                   'improve_diarization_with_llm/claude_corrector.py')}}}
