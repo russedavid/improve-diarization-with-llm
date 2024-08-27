@@ -91,7 +91,7 @@ class ClaudeDiarizationCorrector:
                     '''
         r = self.chat(prompt)
         print(f"Processed chunk {index + 1} of {total_chunks}")
-        corrected_text = r.content
+        corrected_text = r.content[0].text
         return corrected_text
 
     def process_conversation(self):
