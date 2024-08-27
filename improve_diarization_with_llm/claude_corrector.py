@@ -63,25 +63,32 @@ class ClaudeDiarizationCorrector:
         Returns:
             str: The corrected text chunk.
         """
-        if index == 0:
-            prompt = f'''In the speaker diarization transcript below, some words are potentially misplaced due to bleeding. As in one speaker is talking then immediately after a second speaker is talking, and the first words of the second speaker are attributed to the last words of the second speaker. I need you to read the meaning and context of the sentences and make your best guess about how the sentences should be re-distributed 
-                      They may also be displaced in the following manner-- Two or more speakers speak, and the words are all attributed to one speaker, when actually 2 or three speakers spoke like this: speaker_1 "talking" speaker_2 "talking" speaker_1 "talking", but all the transcription captures is speaker_1 "talking talking talking" 
-                      Please correct those words and move them to the right speaker. Directly show the corrected transcript without explaining what changes were made or why you made those changes. 
-                      This is the first of {total_chunks} parts. Correct this chunk in isolation. Text to correct is indicated by this tag <text-to-correct></text-to-correct>
-                      Feel free to attempt to correct the speaker identified, for example if it says it is speaker_01, but you think it is speaker_02, correct that, also if you know the actual name of a character, replace the "SPEAKER_01" with it's actual character name
+        if index % 4 == 0:
+            self.chat = Chat(self.model, sp="""You are a helpful and concise assistant that will correct a diarization script.""")
+            prompt = f'''In the speaker diarization transcript below, some words are potentially mis-attributed due to bleeding or other common diarization errors. The words are always in the right order, but they may be attributed to the wrong speaker.
+                      For example one speaker is talking then immediately after a second speaker is talking, and the first words of the second speaker are attributed to the last words of the second speaker. 
+                      I need you to read the meaning and context of the sentences and make your best guess about how the sentences should be re-distributed 
+                      They may also be displaced in the following manner-- Two or more speakers speak, and the words are all attributed to one speaker, 
+                      when actually 2 or three speakers spoke like this: speaker_1 "talking" speaker_2 "talking" speaker_1 "talking", but all the transcription captures is speaker_1 "talking talking talking" 
+                      Please correct the attribution of those words with the correct speaker. Directly return the corrected transcript without explaining what changes were made or why you made those changes. Use your judgement to determine the correct speaker attribution.
+                      Also, if you think speaker attribution has mis-attributed in any other novel way, please correct that as well.
+                      Also, if any speakers are attributes as "speaker_unknown" then make your best guess as to who the speaker is.
+                      This is either the first of {total_chunks} parts, or the context has been reset in order to conserve computing costs. Correct this chunk in isolation. Text to correct is indicated by this tag <text-to-correct></text-to-correct>
                       <text-to-correct>{chunk}</text-to-correct>
                     '''
         else:
-            if index % 2 == 0:
-                self.chat = Chat(self.model, sp="""You are a helpful and concise assistant that will correct a diarization script.""")
-            prompt = f'''In the speaker diarization transcript below, some words are potentially misplaced.
-                      Please correct those words and move them to the right speaker. Directly show the corrected transcript without explaining what changes were made or why you made those changes.
+            prompt = f'''In the speaker diarization transcript below, some words are potentially mis-attributed due to bleeding or other common diarization errors. The words are always in the right order, but they may be attributed to the wrong speaker.
+                      For example one speaker is talking then immediately after a second speaker is talking, and the first words of the second speaker are attributed to the last words of the second speaker. 
+                      I need you to read the meaning and context of the sentences and make your best guess about how the sentences should be re-distributed 
+                      They may also be displaced in the following manner-- Two or more speakers speak, and the words are all attributed to one speaker, 
+                      when actually 2 or three speakers spoke like this: speaker_1 "talking" speaker_2 "talking" speaker_1 "talking", but all the transcription captures is speaker_1 "talking talking talking" 
+                      Please correct the attribution of those words with the correct speaker. Directly return the corrected transcript without explaining what changes were made or why you made those changes. Use your judgement to determine the correct speaker attribution.
+                      Also, if you think speaker attribution has mis-attributed in any other novel way, please correct that as well.
                       Continue diarization from previous {index} parts, maintaining consistent speaker attribution and context. The diarization transcript to correct is indicated by this tag <text-to-correct></text-to-correct>
-                      This is part {index + 1} of {total_chunks}. Correct the section indicated by <previous-corrected-text></previous-corrected-text> only, and directly show the corrected transcript without explaining what changes were made or why you made those changes.
-                      Feel free to attempt to correct the speaker identified, for example if it says it is speaker_01, but you think it is speaker_02, correct that, also if you know the actual name of a character, replace the "SPEAKER_01" with it's actual character name
+                      Also, if any speakers are attributes as "speaker_unknown" then make your best guess as to who the speaker is.
+                      This is part {index + 1} of {total_chunks}.
                       <text-to-correct>{chunk}</text-to-correct>
                     '''
-        
         r = self.chat(prompt)
         print(f"Processed chunk {index + 1} of {total_chunks}")
         corrected_text = r.content
