@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "claude_corrector.html",
+    "href": "claude_corrector.html",
+    "title": "Claude Improve",
+    "section": "",
+    "text": "pip install improve_diarization_with_llm",
+    "crumbs": [
+      "Claude Improve"
+    ]
+  },
+  {
+    "objectID": "claude_corrector.html#install",
+    "href": "claude_corrector.html#install",
+    "title": "Claude Improve",
+    "section": "",
+    "text": "pip install improve_diarization_with_llm",
+    "crumbs": [
+      "Claude Improve"
+    ]
+  },
+  {
+    "objectID": "claude_corrector.html#core-functionality",
+    "href": "claude_corrector.html#core-functionality",
+    "title": "Claude Improve",
+    "section": "Core Functionality",
+    "text": "Core Functionality\n\nsource\n\nClaudeDiarizationCorrector\n\n ClaudeDiarizationCorrector (input_path:str, output_path:str,\n                             chunk_size:int=20000)\n\n*Initialize the ClaudeDiarizationCorrector.\nArgs: input_path (str): Path to the input diarization transcript file. output_path (str): Path where the corrected transcript will be saved. chunk_size (int, optional): Maximum size of each chunk for processing. Defaults to 20000.*",
+    "crumbs": [
+      "Claude Improve"
+    ]
+  },
+  {
+    "objectID": "claude_corrector.html#example-usage",
+    "href": "claude_corrector.html#example-usage",
+    "title": "Claude Improve",
+    "section": "Example Usage",
+    "text": "Example Usage\nHere’s a step-by-step example of how to use the ClaudeDiarizationCorrector in your own Python script or notebook:\n\nimport os\nfrom improve_diarization_with_llm import claude_corrector\n    \nos.environ['ANTHROPIC_API_KEY'] = 'your-api-key'  # Replace with your actual API key\n\n\nNext, create a ClaudeDiarizationCorrector object with your input and output file paths:\n\n\ninput_file = 'path/to/your/input/transcript.txt'  # Replace with your actual input file path\noutput_file = 'path/to/your/output/improved_transcript.txt'  # Replace with your desired output file path\n    \ncorrector = claude_corrector.ClaudeDiarizationCorrector(input_file, output_file)\n\n\nFinally, process the conversation:\n\ncorrected_transcript = corrector.process_conversation()\nprint(\"Correction complete. Check the output file for results.\")",
+    "crumbs": [
+      "Claude Improve"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "improve-diarization-with-llm",
+    "section": "",
+    "text": "pip install improve_diarization_with_llm",
+    "crumbs": [
+      "improve-diarization-with-llm"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "improve-diarization-with-llm",
+    "section": "",
+    "text": "pip install improve_diarization_with_llm",
+    "crumbs": [
+      "improve-diarization-with-llm"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "improve-diarization-with-llm",
+    "section": "How to use",
+    "text": "How to use\n\nimport os\nfrom improve_diarization_with_llm import claude_corrector\n    \nos.environ['ANTHROPIC_API_KEY'] = 'your-api-key'  # Replace with your actual API key\ninput_file = 'path/to/your/input/transcript.txt'  # Replace with your actual input file path\noutput_file = 'path/to/your/output/improved_transcript.txt'  # Replace with your desired output file path\n    \ncorrector = claude_corrector.ClaudeDiarizationCorrector(input_file, output_file)\n\n# corrector.process_conversation() this assumes a valid ANTHROPIC_API_KEY environment variable and input path",
+    "crumbs": [
+      "improve-diarization-with-llm"
+    ]
+  }
+]
